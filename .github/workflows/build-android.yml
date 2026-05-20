@@ -31,7 +31,7 @@ jobs:
       run: npm run build >> build_log.txt 2>&1
 
     - name: Sync ke Capacitor Android
-      run: npx cap sync android >> build_log.txt 2>&1
+      run: npx @capacitor/cli sync android >> build_log.txt 2>&1
 
     - name: Build APK menggunakan Gradle
       working-directory: ./android
