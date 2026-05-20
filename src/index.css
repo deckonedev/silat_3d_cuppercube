@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-slate-900 text-slate-100 antialiased;
+  }
+}
+
+.image-profil {
+  border-radius: 100em;
+  border-top: 2px solid #cf2031;
+  border-left: 2px solid #0f7dc8;
+  border-bottom: 2px solid #2eb31a ;
+  border-right: 2px solid #eab823;
+}
