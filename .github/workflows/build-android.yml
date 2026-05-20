@@ -25,20 +25,27 @@ jobs:
         java-version: '17'
 
     - name: Install Dependensi
-      run: npm install
+      run: npm install > build_log.txt 2>&1
 
     - name: Build React Web App
-      run: npm run build
+      run: npm run build >> build_log.txt 2>&1
 
     - name: Sync ke Capacitor Android
-      run: npx cap sync android
+      run: npx cap sync android >> build_log.txt 2>&1
 
     - name: Build APK menggunakan Gradle
       working-directory: ./android
       run: |
-        sed -i 's/\r$//' gradlew
-        chmod +x ./gradlew
-        ./gradlew assembleDebug
+        sed -i 's/\r$//' gradlew >> ../build_log.txt 2>&1
+        chmod +x ./gradlew >> ../build_log.txt 2>&1
+        ./gradlew assembleDebug >> ../build_log.txt 2>&1
+
+    - name: Upload Debug Log
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: Build-Logs
+        path: build_log.txt
 
     - name: Upload APK ke GitHub
       uses: actions/upload-artifact@v4
